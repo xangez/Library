@@ -6,7 +6,6 @@ addBookbtn.addEventListener("click", openForm);
 
 const shelf = document.querySelector("#shelf");
 
-
 const submit = document.querySelector(".submit");
 submit.addEventListener("click", addBookToLibrary);
 
@@ -21,7 +20,6 @@ function openForm() {
   else {
     form.style.display = 'block';
     addBookbtn.textContent = 'Close';
-
   }
 }
 
@@ -31,14 +29,11 @@ function Book(title, author, pages, read) {
   this.pages = pages;
   this.read = read;
   this.pushtoMyLibrary();
-
 }
 
 Book.prototype.pushtoMyLibrary = function() {
   myLibrary.push(this);
 }
-
-
 
 function addBookToLibrary() {
   let title = inputs[0].value;
@@ -53,17 +48,18 @@ function render() {
   let book = myLibrary[myLibrary.length - 1]
 
   let bookCard = document.createElement('div');
+  bookCard.id = book.title;
 
   //title
-  let cardInfo = document.createElement('div');
-  cardInfo.textContent = book.title;
-  cardInfo.classList.add("cardInfo");
-  bookCard.appendChild(cardInfo);
+  let cardTitle = document.createElement('div');
+  cardTitle.textContent = book.title;
+  cardTitle.classList.add("cardTitle");
+  bookCard.appendChild(cardTitle);
 
   //author
   let cardAuthor = document.createElement('div');
   cardAuthor.textContent = book.author;
-  cardAuthor.classList.add("cardInfo");
+  cardAuthor.classList.add("cardAuthor");
   bookCard.appendChild(cardAuthor);
 
   //cardPages
@@ -76,6 +72,9 @@ function render() {
   let cardRead = document.createElement('button');
   cardRead.textContent = book.read;
   cardRead.classList.add("cardRead");
+  cardRead.textContent == "Read" ? 
+    cardRead.style.backgroundColor = "rgb(175, 169, 134)" : 
+    cardRead.style.backgroundColor = "rgb(190, 161, 161)";
   bookCard.appendChild(cardRead);
   cardRead.addEventListener("click", toggleRead);
 
@@ -84,26 +83,33 @@ function render() {
   removeBtn.textContent = "X";
   removeBtn.classList.add("removeBtn");
   bookCard.appendChild(removeBtn);
-  removeBtn.addEventListener("click", removeCard) 
+  removeBtn.addEventListener("click", removeCard);
 
   //append card
   bookCard.classList.add("card");
   shelf.appendChild(bookCard);
-
 }
 
 function toggleRead(e){
   if (e.target.textContent == "Not read") {
     e.target.textContent = "Read";
+    e.target.style.backgroundColor = "rgb(175, 169, 134)";
   }
   else {
     e.target.textContent = "Not read";
+    e.target.style.backgroundColor = "rgb(190, 161, 161)";
   }
 }
 
 function removeCard(e) {
-  let r = e.target.parentNode.parentNode;
-  r.removeChild(e.target.parentNode);
+  let book = e.target.parentNode;
+  let id = book.id;
+  book.remove();
+  myLibrary.forEach((book, index) => {
+    if (book.title == id) {
+      myLibrary.splice(index, 1);
+    }
+  });
 }
 
 
