@@ -23,6 +23,7 @@ function openForm() {
   }
 }
 
+/*
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
@@ -34,13 +35,26 @@ function Book(title, author, pages, read) {
 Book.prototype.pushtoMyLibrary = function() {
   myLibrary.push(this);
 }
+*/
+
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+}
+
+
 
 function addBookToLibrary() {
   let title = inputs[0].value;
   let author = inputs[1].value;
   let pages = inputs[2].value;
   let checked = inputs[3].checked ? "Read" : "Not read";
-  new Book(title, author, pages, checked);
+  let newBook = new Book(title, author, pages, checked);
+  myLibrary.push(newBook);
   render();
 }
 
@@ -51,19 +65,19 @@ function render() {
   bookCard.id = book.title;
 
   //title
-  let cardTitle = document.createElement('div');
+  let cardTitle = document.createElement('span');
   cardTitle.textContent = book.title;
   cardTitle.classList.add("cardTitle");
   bookCard.appendChild(cardTitle);
 
   //author
-  let cardAuthor = document.createElement('div');
+  let cardAuthor = document.createElement('span');
   cardAuthor.textContent = book.author;
   cardAuthor.classList.add("cardAuthor");
   bookCard.appendChild(cardAuthor);
 
   //cardPages
-  let cardPages = document.createElement('div');
+  let cardPages = document.createElement('span');
   cardPages.textContent = book.pages;
   cardPages.classList.add("cardPages");
   bookCard.appendChild(cardPages);
@@ -113,5 +127,6 @@ function removeCard(e) {
 }
 
 
-new Book("The Hobbit", "J.R.R Tolkien", '200', 'Read');
+let thehobbit = new Book("The Hobbit", "J.R.R Tolkien", '200', 'Read');
+myLibrary.push(thehobbit);
 render();
