@@ -19,6 +19,7 @@ body {
 }
 
 .container {
+  min-width: 700px;
   background-color: rgb(65, 65, 68);
 }
 
