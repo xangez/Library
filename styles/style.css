@@ -138,6 +138,16 @@ body {
   color: inherit;
 }
 
+.toggleRead {
+  background-color: rgb(175, 169, 134);
+
+}
+
+.toggleNotRead {
+  background-color: rgb(190, 161, 161);
+
+}
+
 .cardRead:hover {
   background-color: rgb(180, 158, 161) !important;
 }
@@ -165,3 +175,4 @@ body {
 .removeBtn:hover {
   background-color: rgb(201, 178, 184);
 }
+
